@@ -55,7 +55,7 @@ Este documento fornece uma descrição detalhada das regras de decisão estabele
 
 <div align="center">
 <sub>Figura X - Título</sub>
-<img src="../assets/diagram_1.png" width="100%" >
+<img src="assets/diagram.jpeg" width="100%" >
 <sup>Fonte: Material produzido pelos autores (2024)</sup>
 </div>
 
