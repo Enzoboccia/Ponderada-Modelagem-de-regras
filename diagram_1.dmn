@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0mila53" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.26.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <decision id="Decision_1fbyw97" name="Aprovação de Pagamento">
+    <informationRequirement id="InformationRequirement_11ap332">
+      <requiredInput href="#InputData_1650d3n" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_10czxz7">
+      <requiredInput href="#InputData_0msu0d2" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1o9qnmd">
+      <input id="Input_1" label="Valor do Pagamento">
+        <inputExpression id="InputExpression_1" typeRef="number">
+          <text>valorPagamento</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0ls8v3c" label="Saldo da Conta Bancária">
+        <inputExpression id="LiteralExpression_1hor3t7" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_1hnj884">
+          <text>"Suficiente","Insuficiente"</text>
+        </inputValues>
+      </input>
+      <output id="Output_1" label="Ação de Pagamento" typeRef="string">
+        <outputValues id="UnaryTests_0ez7sno">
+          <text>"Aprovar","Rejeitar"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_0bhimeq">
+        <inputEntry id="UnaryTests_1m4gety">
+          <text>&lt; 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0g42tbr">
+          <text>"Suficiente"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_179g1sa">
+          <text>Para &lt; 10000 e "Saldo Suficiente" "Aprovar"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1pzntm6">
+        <inputEntry id="UnaryTests_1502yth">
+          <text>&gt;= 10000</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1a0jkih">
+          <text>"Insuficiente"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1mhh4bg">
+          <text>Para &lt; 10000 e "Saldo Insuficiente" "Rejeitar"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_16sq0ot">
+        <inputEntry id="UnaryTests_148nryu">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17egzkc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0c2sk62">
+          <text>Para  &gt;= 10000 e "Saldo Suficiente" "Rejeitar"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dubag9">
+        <inputEntry id="UnaryTests_1oiiws5">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_148fi7t">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_114jfd1">
+          <text>Para &gt;= 10000 e "Saldo Insuficiente" "Rejeitar"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0qb46ah">
+        <inputEntry id="UnaryTests_0p2kxsz">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0u1czye">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0qm0wql">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1650d3n" name="Valor do Pagamento" />
+  <inputData id="InputData_0msu0d2" name="Saldo da Conta Bancária" />
+  <inputData id="InputData_11eyux8" name="Status de Entrega do Produto/Serviço" />
+  <inputData id="InputData_1itnjum" name="Recebimento de Pagamento" />
+  <decision id="Decision_06fdfys" name="Provisão de Devedores Duvidosos">
+    <informationRequirement id="InformationRequirement_1l0t4pz">
+      <requiredInput href="#InputData_13k6hva" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_02wtpgw">
+      <requiredInput href="#InputData_0zilmob" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_18vz0rh">
+      <input id="InputClause_0ccfiig">
+        <inputExpression id="LiteralExpression_04pguoy" typeRef="string" />
+      </input>
+      <output id="OutputClause_1st8u8f" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <decision id="Decision_03rvi6r" name="Reconhecimento de Receita">
+    <informationRequirement id="InformationRequirement_18dety5">
+      <requiredInput href="#InputData_11eyux8" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0ssp1g4">
+      <requiredInput href="#InputData_1itnjum" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_07ch8ko">
+      <input id="InputClause_1dkgzp7">
+        <inputExpression id="LiteralExpression_1bjmq5t" typeRef="string" />
+      </input>
+      <output id="OutputClause_1qjnbx0" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_13k6hva" name="Pagamento Parcial" />
+  <inputData id="InputData_0zilmob" name="Dias de Atraso" />
+  <decision id="Decision_1gi0j0x" name="Aprovação de Reembolso de Despesas">
+    <informationRequirement id="InformationRequirement_13fza6v">
+      <requiredInput href="#InputData_1vtbky2" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_091mq4j">
+      <requiredInput href="#InputData_1hwvwhp" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0nwbcf5">
+      <input id="InputClause_0pkw38p">
+        <inputExpression id="LiteralExpression_0hlxrqh" typeRef="string" />
+      </input>
+      <output id="OutputClause_0tpchig" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_1vtbky2" name="Valor da Despesa" />
+  <inputData id="InputData_1hwvwhp" name="Comprovante Fiscal" />
+  <inputData id="InputData_04asmwf" name="Valor do Ativo" />
+  <decision id="Decision_1qsl5ht" name="Classificação de Ativos Imobilizados">
+    <informationRequirement id="InformationRequirement_0t2l2di">
+      <requiredInput href="#InputData_04asmwf" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1fwgre8">
+      <requiredInput href="#InputData_07hilnb" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0zki9q6">
+      <input id="InputClause_0qj7o53">
+        <inputExpression id="LiteralExpression_0vb5yrm" typeRef="string" />
+      </input>
+      <output id="OutputClause_0ku13xw" typeRef="string" />
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_07hilnb" name="Vida Útil Estimada" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1fbyw97">
+        <dc:Bounds height="80" width="180" x="640" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1jytnkk" dmnElementRef="InputData_1650d3n">
+        <dc:Bounds height="45" width="125" x="767" y="238" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_122o8oo" dmnElementRef="InputData_0msu0d2">
+        <dc:Bounds height="45" width="125" x="588" y="239" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1ajhwoj" dmnElementRef="InformationRequirement_11ap332">
+        <di:waypoint x="830" y="238" />
+        <di:waypoint x="760" y="200" />
+        <di:waypoint x="760" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1yjpomu" dmnElementRef="InformationRequirement_10czxz7">
+        <di:waypoint x="651" y="239" />
+        <di:waypoint x="700" y="200" />
+        <di:waypoint x="700" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1n03vts" dmnElementRef="InputData_11eyux8">
+        <dc:Bounds height="45" width="125" x="327" y="317" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1i9kj7o" dmnElementRef="InformationRequirement_18dety5">
+        <di:waypoint x="390" y="362" />
+        <di:waypoint x="310" y="440" />
+        <di:waypoint x="310" y="460" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1a7dtsy" dmnElementRef="InputData_1itnjum">
+        <dc:Bounds height="45" width="125" x="157" y="307" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1afxlsh" dmnElementRef="InformationRequirement_0ssp1g4">
+        <di:waypoint x="220" y="352" />
+        <di:waypoint x="250" y="440" />
+        <di:waypoint x="250" y="460" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0m1ufkq" dmnElementRef="Decision_06fdfys">
+        <dc:Bounds height="80" width="180" x="590" y="480" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0puo6rg" dmnElementRef="Decision_03rvi6r">
+        <dc:Bounds height="80" width="180" x="190" y="460" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0xq7mjb" dmnElementRef="InputData_13k6hva">
+        <dc:Bounds height="45" width="125" x="617" y="717" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0emt5ba" dmnElementRef="InformationRequirement_1l0t4pz">
+        <di:waypoint x="680" y="717" />
+        <di:waypoint x="650" y="580" />
+        <di:waypoint x="650" y="560" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_06k8yjt" dmnElementRef="InputData_0zilmob">
+        <dc:Bounds height="45" width="125" x="857" y="717" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0napnzj" dmnElementRef="InformationRequirement_02wtpgw">
+        <di:waypoint x="920" y="717" />
+        <di:waypoint x="710" y="580" />
+        <di:waypoint x="710" y="560" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0b7bp35" dmnElementRef="Decision_1gi0j0x">
+        <dc:Bounds height="80" width="180" x="990" y="390" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_19mkjqo" dmnElementRef="InputData_1vtbky2">
+        <dc:Bounds height="45" width="125" x="907" y="557" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_046vb5u" dmnElementRef="InformationRequirement_13fza6v">
+        <di:waypoint x="970" y="557" />
+        <di:waypoint x="1050" y="490" />
+        <di:waypoint x="1050" y="470" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_17f2iyi" dmnElementRef="InputData_1hwvwhp">
+        <dc:Bounds height="45" width="125" x="1147" y="557" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1vjzhcj" dmnElementRef="InformationRequirement_091mq4j">
+        <di:waypoint x="1210" y="557" />
+        <di:waypoint x="1110" y="490" />
+        <di:waypoint x="1110" y="470" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0qvqta4" dmnElementRef="InputData_04asmwf">
+        <dc:Bounds height="45" width="125" x="977" y="57" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0oup9wn" dmnElementRef="InformationRequirement_0t2l2di">
+        <di:waypoint x="1040" y="102" />
+        <di:waypoint x="1080" y="201" />
+        <di:waypoint x="1080" y="221" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1bm7gjd" dmnElementRef="Decision_1qsl5ht">
+        <dc:Bounds height="80" width="180" x="1020" y="221" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0u2rnth" dmnElementRef="InputData_07hilnb">
+        <dc:Bounds height="45" width="125" x="1177" y="57" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1no33xa" dmnElementRef="InformationRequirement_1fwgre8">
+        <di:waypoint x="1240" y="102" />
+        <di:waypoint x="1140" y="201" />
+        <di:waypoint x="1140" y="221" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
