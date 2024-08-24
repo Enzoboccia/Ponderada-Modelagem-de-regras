@@ -1,1 +1,1 @@
-# Ponderada-Modelagem-de-regras-e-decis-o
+# Ponderada Modelagem de regras e decisão
