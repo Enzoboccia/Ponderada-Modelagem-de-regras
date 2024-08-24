@@ -53,7 +53,11 @@ Este documento fornece uma descrição detalhada das regras de decisão estabele
 
 ## Modelo DMN
 
-**[Espaço reservado para o diagrama DMN que será inserido posteriormente]**
+<div align="center">
+<sub>Figura X - Título</sub>
+<img src="../assets/diagram_1.png" width="100%" >
+<sup>Fonte: Material produzido pelos autores (2024)</sup>
+</div>
 
 ## Conclusão
 
